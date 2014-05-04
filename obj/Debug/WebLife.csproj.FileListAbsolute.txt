@@ -56,3 +56,8 @@ D:\BSUIR\Itransition\WebLife\WebLife\obj\Debug\WebLife.pdb
 D:\BSUIR\Itransition\WebLife\WebLife\bin\Postal.dll
 D:\BSUIR\Itransition\WebLife\WebLife\bin\ShortGuid.dll
 D:\BSUIR\Itransition\WebLife\WebLife\bin\Postal.xml
+D:\BSUIR\Itransition\WebLife\WebLife\obj\Debug\WebLife.Resources.Res.resources
+D:\BSUIR\Itransition\WebLife\WebLife\obj\Debug\WebLife.csproj.GenerateResource.Cache
+D:\BSUIR\Itransition\WebLife\WebLife\bin\ru\WebLife.resources.dll
+D:\BSUIR\Itransition\WebLife\WebLife\obj\Debug\WebLife.Resources.Res.ru.resources
+D:\BSUIR\Itransition\WebLife\WebLife\obj\Debug\ru\WebLife.resources.dll

@@ -75,13 +75,11 @@
         "united": "//bootswatch.com/united/bootstrap.min.css"
     }
     $(document).ready(function () {
-        var sheets = document.styleSheets;
-        var themesheet = $('<link href="' + themes['amelia'] + '" rel="stylesheet" />');
-        sheets[0] = themesheet;
+        var themesheet = $('<link href="' + themes['spacelab'] + '" rel="stylesheet" />');
+        themesheet.appendTo('head');
         $('.theme-link').click(function () {
             var themeurl = themes[$(this).attr('data-theme')];
             themesheet.attr('href', themeurl);
-
         });
     });
 </script>
