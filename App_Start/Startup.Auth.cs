@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
+using Microsoft.Owin.Security.Google;
 using Owin;
 
 namespace WebLife
@@ -32,7 +33,10 @@ namespace WebLife
             //   appId: "",
             //   appSecret: "");
 
-            //app.UseGoogleAuthentication();
+            app.UseGoogleAuthentication(
+                "541627208271-d8o25iai8qcliqrfqe8rioo89qir37tv.apps.googleusercontent.com",
+                "DN0HNblqk9qKa6wUmZW-6bUv"
+                );
         }
     }
 }

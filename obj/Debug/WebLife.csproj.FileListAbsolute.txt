@@ -61,3 +61,6 @@ D:\BSUIR\Itransition\WebLife\WebLife\obj\Debug\WebLife.csproj.GenerateResource.C
 D:\BSUIR\Itransition\WebLife\WebLife\bin\ru\WebLife.resources.dll
 D:\BSUIR\Itransition\WebLife\WebLife\obj\Debug\WebLife.Resources.Res.ru.resources
 D:\BSUIR\Itransition\WebLife\WebLife\obj\Debug\ru\WebLife.resources.dll
+D:\BSUIR\Itransition\WebLife\WebLife\bin\OAuth2.dll
+D:\BSUIR\Itransition\WebLife\WebLife\bin\RestSharp.dll
+D:\BSUIR\Itransition\WebLife\WebLife\bin\RestSharp.xml

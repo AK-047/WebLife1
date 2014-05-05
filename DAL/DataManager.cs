@@ -35,5 +35,11 @@ namespace WebLife.DAL
 
         }
 
+        public string GetTheme(string id)
+        {
+            
+            return id == null ? null : GetUser(u => u.Id == id).Theme;
+        }
+
     }
 }

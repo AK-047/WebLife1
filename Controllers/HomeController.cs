@@ -7,6 +7,7 @@ using WebLife.Helpers;
 
 namespace WebLife.Controllers
 {
+    [RequireHttps]
     public class HomeController : MultiLanguageController
     {
         public ActionResult Index()
