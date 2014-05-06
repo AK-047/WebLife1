@@ -1,0 +1,27 @@
+﻿@using WebLife.Models
+@model WebLife.Models.AdminViewModel
+
+@{
+    ViewBag.Title = "ManageUsers";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ManageUsers</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="col-md-12">
+        <ul style="list-style-type: none">
+            @foreach (ApplicationUser u in Model.users)
+            {
+                <li>
+                    <div class="row">
+                        <h4>@u.UserName</h4>
+                        <a class="btn-default glyphicon glyphicon-remove" href="@Url.Action("Delete",new {@u.Id})"></a>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+}
+

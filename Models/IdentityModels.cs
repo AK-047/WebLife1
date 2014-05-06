@@ -9,6 +9,7 @@ namespace WebLife.Models
         public string ConfirmationToken { get; set; }
         public bool IsConfirmed { get; set; }
         public string Theme { get; set; }
+        public int Role { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

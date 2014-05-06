@@ -14,7 +14,6 @@ namespace WebLife.Helpers
         protected override void ExecuteCore()
         {
             string cultureName = null;
-            string Language = null;
             HttpCookie cultureCookie = Request.Cookies["Arsenal"];
             if (cultureCookie != null)
             {

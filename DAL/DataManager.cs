@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using System.Web.Security;
 using Microsoft.Ajax.Utilities;
 using WebLife.Models;
 
@@ -41,5 +42,15 @@ namespace WebLife.DAL
             return id == null ? null : GetUser(u => u.Id == id).Theme;
         }
 
+        public IQueryable<ApplicationUser> GetUsers()
+        {
+            return context.Set<ApplicationUser>();
+        }
+
+        public void RemoveUser(string id)
+        {
+            context.Users.Remove(context.Users.Single(u => u.Id == id));
+            context.SaveChanges();
+        }
     }
 }

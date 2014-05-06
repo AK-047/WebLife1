@@ -5,7 +5,9 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.ApplicationServices;
 using System.Web.Mvc;
+using System.Web.Security;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.Owin.Security;
@@ -52,7 +54,7 @@ namespace WebLife.Controllers
                 if (user != null && user.IsConfirmed)
                 {
                     await SignInAsync(user, model.RememberMe);
-                    return RedirectToLocal(returnUrl);
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {
@@ -87,8 +89,12 @@ namespace WebLife.Controllers
                     UserName = model.UserName,
                     Email = model.Email,
                     ConfirmationToken = confirmationToken,
-                    IsConfirmed = false
+                    IsConfirmed = false,
+                    Role = 2
+                   
                 };
+               
+                
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -123,12 +129,9 @@ namespace WebLife.Controllers
         [AllowAnonymous]
         public ActionResult RegisterConfirmation(string Id)
         {
-            if (ConfirmAccount(Id))
-            {
-                return RedirectToAction("ConfirmationSuccess");
-            }
-            return RedirectToAction("ConfirmationFailure");
+            return ConfirmAccount(Id) ? RedirectToAction("ConfirmationSuccess") : RedirectToAction("About","Home");
         }
+
         [AllowAnonymous]
         public ActionResult ConfirmationSuccess()
         {
@@ -309,7 +312,7 @@ namespace WebLife.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser() { UserName = model.UserName };
+                var user = new ApplicationUser() { UserName = model.UserName, IsConfirmed = true};
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
