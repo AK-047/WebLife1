@@ -10,21 +10,18 @@
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <title>Conway's Game of Life</title>
 <body>
-    <div class="col" id="container">
-        <div id="header">
-            <h1>Conway's Game of Life</h1>
-        </div>
+    <div class="row" id="container">
         <div id="left-content">
-            <h2>Game</h2>
             <p>Generation counter: <span id="counter">0</span></p>
             <div id="myCanvas">
                 <canvas id="grid" class="grid" width="2400" height="3300"></canvas>
             </div>
         </div>
-        <div class="row" id="right-content">
+        <div class="col-md-4" id="right-content">
             <h2>Controls</h2>
             <a class="btn btn-default btn-sm col-md-3" id="controlLink" href="javascript:void(0)">Start/Stop</a>
             <a class="btn btn-default btn-sm col-md-3" id="clearLink" href="javascript:void(0)">Clear Grid</a>
+            <a class="btn btn-default btn-sm col-md-3" id="resize" href="javascript:void(0)">Resize</a>
             <label>Min:</label>
             <select class="input-sm" id="minimumSelect">
                 <option value="1">1</option>
@@ -47,7 +44,7 @@
                 <option value="7">7</option>
                 <option value="8">8</option>
             </select>
-            <label>Min:</label>
+            <label>Spawn:</label>
             <select class="input-sm" id="spawnSelect">
                 <option value="1">1</option>
                 <option value="2">2</option>
@@ -58,13 +55,7 @@
                 <option value="7">7</option>
                 <option value="8">8</option>
             </select>
-            <a class="btn btn-default btn-sm col-md-3" id="resize" href="javascript:void(0)">Resize</a>
-            <br />
-            <p>
-            </p>
         </div>
-       
-
     </div>
 </body>
 

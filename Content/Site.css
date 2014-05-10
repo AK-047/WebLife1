@@ -43,8 +43,8 @@ input[type="checkbox"].input-validation-error {
 
 
 #myCanvas {
-    width:640px;
-    height:480px;
+    width:800px;
+    height:600px;
     border:1px solid #000;
     overflow:auto;
 }
