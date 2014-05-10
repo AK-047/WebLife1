@@ -9,7 +9,7 @@
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    
+
 
 
 </head>
@@ -46,9 +46,15 @@
                             </ul>
                         </li>
                     }
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Users", "Index", "Message")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li>
                     <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Lang<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li><a id="en" onclick="javascript: CreateCookie('Arsenal', 'en', 365)">English</a></li>
+                            <li> <a id="ru" onclick="javascript: CreateCookie('Arsenal', 'ru', 365)">Russian</a></li>
+                        </ul>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
@@ -56,11 +62,13 @@
     </div>
     <div class="container body-content">
         @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
-        </footer>
+        
+     
     </div>
+    <footer>
+        <hr />
+        <p align="center">&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+    </footer>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
@@ -78,4 +86,26 @@
         <link href="@Href(theme)" rel="stylesheet" />
     }
 }
+
+
 </html>
+
+
+<script type="text/javascript">
+
+    function CreateCookie(name, value, days) {
+        var expires = "";
+        var cookieName = "";
+        if (days) {
+            var date = new Date()
+            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+            expires = "; expires =" + date.toUTCString();
+            cookieName = name + "=" + value + expires + ";path = /";
+            document.cookie = cookieName;
+        } else {
+            expires = "";
+            document.cookie = name + "=" + value + expires + ";Path = /";
+        }
+        window.location.reload();
+    }
+</script>

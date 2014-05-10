@@ -118,6 +118,7 @@ namespace WebLife.Controllers
             if (user != null)
             {
                 user.IsConfirmed = true;
+                user.Role = 2;
                 dm.ModifyUser(user);
                 return true;
             }

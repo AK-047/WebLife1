@@ -10,7 +10,10 @@
             @Html.ActionLink("Hello " + User.Identity.GetUserName() + "!", "Manage", "Account", routeValues: null, htmlAttributes: new { title = "Manage" })
         </li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Log off</a></li>
-        <li><a href="@Url.Action("ManageUsers","Admin")">Manege users</a></li>
+        @if (new WebLife.DAL.DataManager().GetUser(u => u.Id == User.Identity.GetUserId()).Role < 2)
+        {
+            <li><a href="@Url.Action("ManageUsers", "Admin")">Manege users</a></li>
+        }
     </ul>
     }
 }

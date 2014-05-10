@@ -1,4 +1,5 @@
-﻿@using WebLife.Models
+﻿@using Microsoft.AspNet.Identity
+@using WebLife.Models
 @model WebLife.Models.AdminViewModel
 
 @{
@@ -11,17 +12,27 @@
 @using (Html.BeginForm())
 {
     <div class="col-md-12">
-        <ul style="list-style-type: none">
+        <table class="table table-striped">
+            
+
             @foreach (ApplicationUser u in Model.users)
             {
-                <li>
-                    <div class="row">
-                        <h4>@u.UserName</h4>
-                        <a class="btn-default glyphicon glyphicon-remove" href="@Url.Action("Delete",new {@u.Id})"></a>
-                    </div>
-                </li>
+                if (u.Id != User.Identity.GetUserId())
+                {
+                    <tr>
+                        <td>@u.UserName </td>
+                        <td>@u.Email</td>
+                        <td>@(u.IsConfirmed ? "Confirmed" : "Not confirmed")</td>
+                        <td><a class="glyphicon glyphicon-remove" href="@Url.Action("Delete", new {@u.Id})"></a></td>
+                        @if (u.Role == 2)
+                        {
+                            <td><a class="glyphicon glyphicon-ok" href="@Url.Action("GivePower", new {@u.Id})">Admin</a></td>
+                        }
+                    </tr>
+                }
+
             }
-        </ul>
+        </table>
     </div>
 }
 

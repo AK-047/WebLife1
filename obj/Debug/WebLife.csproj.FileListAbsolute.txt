@@ -64,3 +64,7 @@ D:\BSUIR\Itransition\WebLife\WebLife\obj\Debug\ru\WebLife.resources.dll
 D:\BSUIR\Itransition\WebLife\WebLife\bin\OAuth2.dll
 D:\BSUIR\Itransition\WebLife\WebLife\bin\RestSharp.dll
 D:\BSUIR\Itransition\WebLife\WebLife\bin\RestSharp.xml
+D:\BSUIR\Itransition\WebLife\WebLife\bin\Microsoft.AspNet.SignalR.Core.dll
+D:\BSUIR\Itransition\WebLife\WebLife\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+D:\BSUIR\Itransition\WebLife\WebLife\bin\Microsoft.AspNet.SignalR.Core.xml
+D:\BSUIR\Itransition\WebLife\WebLife\bin\Microsoft.AspNet.SignalR.SystemWeb.xml

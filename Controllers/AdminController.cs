@@ -24,5 +24,14 @@ namespace WebLife.Controllers
             new DataManager().RemoveUser(id);
             return RedirectToAction("ManageUsers");
         }
+
+        public ActionResult GivePower(string id)
+        {
+            var dm = new DataManager();
+            var user = dm.GetUser(u => u.Id == id);
+            user.Role = 1;
+            dm.ModifyUser(user);
+            return RedirectToAction("ManageUsers");
+        }
 	}
 }
