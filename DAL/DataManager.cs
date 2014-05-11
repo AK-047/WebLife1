@@ -1,26 +1,23 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Web;
-using System.Web.Security;
-using Microsoft.Ajax.Utilities;
 using WebLife.Models;
 
 namespace WebLife.DAL
 {
-    public class DataManager
+    public class DataManager : IDisposable
     {
         public DataManager()
         {
-            context = new ApplicationDbContext();
+            _context = new ApplicationDbContext();
         }
 
-        private ApplicationDbContext context;
+        private readonly ApplicationDbContext _context;
 
-        public ApplicationUser GetUser(Func<ApplicationUser,bool> predicate)
+        public ApplicationUser GetUser(Func<ApplicationUser, bool> predicate)
         {
-            return context.Users.SingleOrDefault(predicate);
+
+            return _context.Users.SingleOrDefault(predicate);
         }
 
         public void ModifyUser(ApplicationUser user)
@@ -29,28 +26,73 @@ namespace WebLife.DAL
             oldUser.ConfirmationToken = user.ConfirmationToken;
             oldUser.IsConfirmed = user.IsConfirmed;
             oldUser.Email = user.Email;
-            DbSet<ApplicationUser> dbSet = context.Set<ApplicationUser>();
+            DbSet<ApplicationUser> dbSet = _context.Set<ApplicationUser>();
             dbSet.Attach(oldUser);
-            context.Entry(oldUser).State = EntityState.Modified;
-            context.SaveChanges();
+            _context.Entry(oldUser).State = EntityState.Modified;
+            _context.SaveChanges();
 
         }
 
         public string GetTheme(string id)
         {
-            
+
             return id == null ? null : GetUser(u => u.Id == id).Theme;
         }
 
         public IQueryable<ApplicationUser> GetUsers()
         {
-            return context.Set<ApplicationUser>();
+            return _context.Set<ApplicationUser>();
         }
 
         public void RemoveUser(string id)
         {
-            context.Users.Remove(context.Users.Single(u => u.Id == id));
-            context.SaveChanges();
+            _context.Users.Remove(_context.Users.Single(u => u.Id == id));
+            _context.SaveChanges();
+        }
+
+        public void SaveConfig(int cellSize, int min, int max, int spawn, int[][] grid)
+        {
+            var configDbSet = _context.Set<Config>();
+            var config = new Config
+            {
+                CellSize = cellSize,
+                Min = min,
+                Max = max,
+                Spawn = spawn,
+                ConfigId = Guid.NewGuid().ToString()
+            };
+            configDbSet.Attach(config);
+            _context.Entry(config).State = EntityState.Added;
+            _context.SaveChanges();
+
+
+            for (int i = 0; i < grid.Length; i++)
+            {
+                for (int j = 0; j < grid[i].Length; j++)
+                {
+                    if (grid[i][j] != 0)
+                    {
+                        var cellDbSet = _context.Set<Cell>();
+                        var cell = new Cell
+                        {
+                            ConfigId = config.ConfigId,
+                            Id = Guid.NewGuid().ToString(),
+                            X = i,
+                            Y = j
+                        };
+                        cellDbSet.Attach(cell);
+                        _context.Entry(cell).State = EntityState.Added;
+                        _context.SaveChanges();
+
+                    }
+                }
+            }
+        }
+
+
+        public void Dispose()
+        {
+            ((IDisposable) _context).Dispose();
         }
     }
 }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using Microsoft.AspNet.SignalR;
-using WebLife.DAL;
-using WebLife.Models;
+﻿using Microsoft.AspNet.SignalR;
 
 namespace WebLife.Hubs
 {

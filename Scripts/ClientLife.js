@@ -13,8 +13,8 @@
                      
                      var Life = {};
                      Life.CELL_SIZE = 20;
-                     Life.X = 5000;
-                     Life.Y = 5000;
+                     Life.X = 4096;
+                     Life.Y = 4096;
                      Life.WIDTH = Math.floor(Life.X / Life.CELL_SIZE);
                      Life.HEIGHT =  Math.floor(Life.Y / Life.CELL_SIZE);
                      Life.DEAD = 0;
@@ -68,8 +68,6 @@
                              for (var w = 0; w < Life.WIDTH; w++) {
                              destination[h][w] = source[h][w];
                              }
-                             
-                            // destination[h] = source[h].slice(0);
                          }
                      };
                      function Cell(row, column) {
@@ -165,14 +163,8 @@
                          arguments.min = Life.minimum;
                          arguments.max = Life.maximum;
                          arguments.spawn = Life.spawn;
-
                          arguments.grid = Array.matrix(Life.HEIGHT, Life.WIDTH, 0);
-                         //arguments.grid[0] = new Array(2);
-                         //arguments.grid[1] = new Array(2);
-                         //arguments.grid[2] = new Array(2);
-                         //arguments.grid[0][0] = 2;
-
-
+                         Life.copyGrid(Life.grid, arguments.grid);
                          console.log(arguments);
                          $.ajax({
                              type: "POST",
@@ -186,7 +178,6 @@
                              }
                          });
                      }
-
                      function update() {
                          Life.updateState();
                          //updateInput();
@@ -222,7 +213,6 @@
                                      context.fillStyle = "#000";
                                  } else {
                                      context.fillStyle = "#FFFFFF";
-                                     //context.clearRect();
                                  }
                                  context.fillRect(
                                                                            w * Life.CELL_SIZE + 1,
