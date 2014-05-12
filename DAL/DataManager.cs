@@ -104,7 +104,7 @@ namespace WebLife.DAL
 
         public Cell[] GetCells(string configId)
         {
-            return _context.Set<Cell>().ToArray();
+            return _context.Set<Cell>().Where(c => c.ConfigId == configId).ToArray();
         }
 
         public void Dispose()

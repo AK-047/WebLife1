@@ -82,7 +82,7 @@
                      Life.copyGrid = function (source, destination) {
                          for (var h = 0; h < source.length, h< destination.length; h++) {
                              
-                             for (var w = 0; w < Life.WIDTH; w++) {
+                             for (var w = 0; w < source[0].length, w< destination[0].length; w++) {
                              destination[h][w] = source[h][w];
                              }
                          }
@@ -102,10 +102,15 @@
                      var resizeDownLink = document.getElementById("resizeDown");
                      var gridSize = document.getElementById("gridSize");
                      var saveLink = document.getElementById("saveOk");
-                     gridSize.innerHTML =", Size:" + Life.WIDTH + "x" + Life.HEIGHT;
+                     gridSize.innerHTML =Life.WIDTH + "x" + Life.HEIGHT;
                      controlLink.onclick = function () {
                          switch (Life.state) {
                              case Life.STOPPED:
+                                 Life.prevGeneretion = Array.matrix(Life.HEIGHT, Life.WIDTH, 0);
+                                 for (var h = 0; h < Life.HEIGHT; h++)
+                                     for (var w = 0; w < Life.WIDTH; w++) {
+                                         Life.prevGeneretion[h][w] = Life.grid[h][w] == 1 ? 0 : 1;
+                                     }
                                  Life.interval = setInterval(function () {
                                      update();
                                  }, Life.DELAY);
@@ -150,28 +155,23 @@
                          Life.WIDTH =  Math.floor(Life.X / Life.CELL_SIZE);
                          Life.HEIGHT =  Math.floor(Life.Y / Life.CELL_SIZE);
                          Life.grid = Array.matrix(Life.HEIGHT, Life.WIDTH, 0);
-                         for (var h = 0; h < oldHeight; h++) 
-                             for (var w = 0; w < oldWidth; w++)
+                         Life.prevGeneretion = Array.matrix(Life.HEIGHT, Life.WIDTH, 0);
+                         for (var h = 0; h < oldHeight; h++)
+                             for (var w = 0; w < oldWidth; w++) {
                                  Life.grid[h][w] = oldGrid[h][w];
+                                 Life.prevGeneretion[h][w] = Life.grid[h][w] === 1 ? 0 : 1;
+                             }
                          gridSize.innerHTML = ", Size:" + Life.WIDTH + "x" + Life.HEIGHT;
                          Strokes();
-                         updateAnimations1();
+                         updateAnimations();
                      }
                      resizeDownLink.onclick = function () {
-                         Life.copyGrid(Life.grid, Life.prevGeneretion);
-                         clearLink.onclick();
                          Life.CELL_SIZE = Math.floor(Life.CELL_SIZE * 2);
                          Life.WIDTH =  Math.floor(Life.X / Life.CELL_SIZE);
                          Life.HEIGHT =  Math.floor(Life.Y / Life.CELL_SIZE);
-                         var oldGrid = Array.matrix(Life.HEIGHT, Life.WIDTH, 0);
-                         for (var h = 0; h < Life.HEIGHT; h++) 
-                             for (var w = 0; w < Life.WIDTH; w++)
-                                 oldGrid[h][w] = Life.grid[h][w];
                          Life.grid = Array.matrix(Life.HEIGHT, Life.WIDTH, 0);
-                         Life.copyGrid(oldGrid, Life.grid);
                          gridSize.innerHTML = ", Size:" + Life.WIDTH + "x" + Life.HEIGHT;
-                         Strokes();
-                         updateAnimations1();
+                         clearLink.onclick();
                      }
                      saveLink.onclick = function () {
                          $("#enteringName").dialog("close");
@@ -282,7 +282,7 @@
                          
 
                              function canvasOnClickHandler(event) {
-                                 Life.copyGrid(Life.grid, Life.prevGeneretion);
+                                 //Life.copyGrid(Life.grid, Life.prevGeneretion);
                                  var cell = getCursorPosition(event);
                                  var state = Life.grid[cell.row][cell.column] == Life.ALIVE ? Life.DEAD : Life.ALIVE;
                                  Life.grid[cell.row][cell.column] = state;

@@ -1,24 +1,21 @@
-﻿@using System.Web.UI.WebControls
-@using WebLife.Resources
+﻿@using WebLife.Resources
 @{
     ViewBag.Title = "Home Page";
 
 }
 
-<h1>@Res.Name</h1>
 <link href="~/Content/Site.css" rel="stylesheet" />
-
-<title>Conway's Game of Life</title>
-<body>
-    <div class="row" id="container">
-        <div class="col" id="controls">
-            <h2>Controls</h2>
-            <a class="btn btn-default btn-sm col-md-2" id="controlLink" href="javascript:void(0)">Start/Stop</a>
-            <a class="btn btn-default btn-sm col-md-2" id="clearLink" href="javascript:void(0)">Clear Grid</a>
-            <a class="btn btn-default btn-sm col-md-2" id="resizeUp" href="javascript:void(0)"> + </a>
-            <a class="btn btn-default btn-sm col-md-2" id="resizeDown" href="javascript:void(0)"> - </a>
-            <label>Min:</label>
-            <select class="input-sm btn-default" id="minimumSelect">
+@if (Request.IsAuthenticated)
+{
+    <body>
+        <div class="col-md-12 btn-block" id="controls">
+            <h2>@Res.Controls</h2>
+            <a class="btn btn-default" id="controlLink" href="javascript:void(0)">@Res.StartButton</a>
+            <a class="btn btn-default" id="clearLink" href="javascript:void(0)">@Res.ClearButton</a>
+            <a class="btn btn-default" id="resizeUp" href="javascript:void(0)">@Res.ZoomIn</a>
+            <a class="btn btn-default" id="resizeDown" href="javascript:void(0)">@Res.ZoomOut</a>
+            <label>@Res.Min:</label>
+            <select class="btn-default" id="minimumSelect">
                 <option value="1">1</option>
                 <option selected value="2">2</option>
                 <option value="3">3</option>
@@ -28,8 +25,8 @@
                 <option value="7">7</option>
                 <option value="8">8</option>
             </select>
-            <label>Max:</label>
-            <select class="input-sm  btn-default" id="maximumSelect">
+            <label>@Res.Max:</label>
+            <select class="btn-default" id="maximumSelect">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option selected value="3">3</option>
@@ -39,8 +36,8 @@
                 <option value="7">7</option>
                 <option value="8">8</option>
             </select>
-            <label>Spawn:</label>
-            <select class="input-sm  btn-default" id="spawnSelect">
+            <label>@Res.Spawn:</label>
+            <select class="btn-default" id="spawnSelect">
                 <option value="1">1</option>
                 <option value="2">2</option>
                 <option selected value="3">3</option>
@@ -50,72 +47,80 @@
                 <option value="7">7</option>
                 <option value="8">8</option>
             </select>
-            <a class="btn btn-default btn-sm col-md-2" id="save" href="javascript:void(0)">Save</a>
-            <a class="btn btn-default btn-sm col-md-2" id="load" href="@Url.Action("Load","Home")">Load</a>
+            <a class="btn btn-default" id="save" href="javascript:void(0)">@Res.Save</a>
+            <a class="btn btn-default" id="load" href="@Url.Action("Load", "Home")">@Res.Load</a>
 
         </div>
-        <div class="col" id="info">
-            <h5>
-                <label>Generation counter: <span id="counter">0</span></label>
-                <label id="gridSize"></label>
-            </h5>
-        </div>
-       
+
+        <br />
         <div id="left-content">
 
             <div id="myCanvas">
-                <canvas id="grid" class="grid" width="512" height="512"></canvas>
+                <canvas id="grid" class="grid" width="4097" height="4097"></canvas>
             </div>
         </div>
-    </div>
-    <div id="config" 
-         data-cellSize="@ViewBag.CellSize"
-         data-name="@ViewBag.Name"
-         data-min ="@ViewBag.Min"
-         data-max="@ViewBag.Max"
-         data-spawn="@ViewBag.Spawn"
-         data-x="@ViewBag.X"
-         data-y="@ViewBag.Y"
-        >
-    </div>
-    @{
-        ViewBag.CellSize = null;
-        ViewBag.Max = null;
-        ViewBag.Min = null;
-        ViewBag.Name = null;
-        ViewBag.Spawn = null;
-        ViewBag.X = null;
-        ViewBag.Y = null;
-    }
-    
-    <script src="~/Scripts/ClientLife.js"></script>
-    <script>
-        $(function () {
-            $("#enteringName").dialog({
-                autoOpen: false,
-                show: {
-                    effect: "drop",
-                    duration: 500
-                },
-                hide: {
-                    effect: "slide",
-                    duration: 500
-                },
-                modal: true
+        <div class="col" id="info">
+            <h5>
+                <label>@Res.GenerationCounter: <span id="counter">0</span></label>
+                <label>, @Res.Size:</label>
+                <label id="gridSize"></label>
+            </h5>
+        </div>
+        <div id="config"
+             data-cellsize="@ViewBag.CellSize"
+             data-name="@ViewBag.Name"
+             data-min="@ViewBag.Min"
+             data-max="@ViewBag.Max"
+             data-spawn="@ViewBag.Spawn"
+             data-x="@ViewBag.X"
+             data-y="@ViewBag.Y">
+        </div>
+        @{
+    ViewBag.CellSize = null;
+    ViewBag.Max = null;
+    ViewBag.Min = null;
+    ViewBag.Name = null;
+    ViewBag.Spawn = null;
+    ViewBag.X = null;
+    ViewBag.Y = null;
+        }
+
+        <script src="~/Scripts/ClientLife.js"></script>
+        <script>
+            $(function () {
+                $("#enteringName").dialog({
+                    autoOpen: false,
+                    show: {
+                        effect: "drop",
+                        duration: 500
+                    },
+                    hide: {
+                        effect: "slide",
+                        duration: 500
+                    },
+                    modal: true
+                });
+
+                $("#save").click(function () {
+                    $("#enteringName").dialog("open");
+                });
             });
+        </script>
+        <div class="form-control" id="enteringName" style="background: currentColor" title="Enter name">
+            <br />
+            <input type="text" id="configName" />
+            <a class="btn btn-default btn-sm col-md-2" data-dismiss="modal" id="saveOk" href="javascript:void(0)">Ok</a>
+        </div>
 
-            $("#save").click(function () {
-                $("#enteringName").dialog("open");
-            });
-        });
-    </script>
-    <div class="form-control" id="enteringName" style="background: currentColor"title="Enter name">
-        <br/>
-        <input type="text" id="configName" />
-        <a class="btn btn-default btn-sm col-md-2" data-dismiss="modal" id="saveOk" href="javascript:void(0)">Ok</a>
+
+    </body>
+}
+else
+{
+    <div class="jumbotron">
+
+        <p><h1 class="text-center">Welcome to WebLife </h1></p>
+        <p><h3 class="text-center">On our site you can play wonderful game called <b>"Game of Life"</b></h3></p>
+        <a class="btn btn-primary btn-lg btn-block" href="@Url.Action("Login","Account")"><h2>Start playing!</h2></a>
     </div>
-   
-   
-</body>
-
-
+}

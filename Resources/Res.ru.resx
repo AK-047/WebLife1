@@ -117,7 +117,67 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Chat" xml:space="preserve">
+    <value>Чат</value>
+  </data>
+  <data name="ClearButton" xml:space="preserve">
+    <value>Очистить сетку</value>
+  </data>
+  <data name="Controls" xml:space="preserve">
+    <value>Управление</value>
+  </data>
+  <data name="GenerationCounter" xml:space="preserve">
+    <value>Счетчик поколений</value>
+  </data>
+  <data name="Hello" xml:space="preserve">
+    <value>Пивет,</value>
+  </data>
+  <data name="Lang" xml:space="preserve">
+    <value>Язык</value>
+  </data>
+  <data name="Load" xml:space="preserve">
+    <value>Загрузить</value>
+  </data>
+  <data name="LogIn" xml:space="preserve">
+    <value>Войти</value>
+  </data>
+  <data name="LogOff" xml:space="preserve">
+    <value>Выйти</value>
+  </data>
+  <data name="ManageUsers" xml:space="preserve">
+    <value>Управление пользователями</value>
+  </data>
+  <data name="Max" xml:space="preserve">
+    <value>Макс</value>
+  </data>
+  <data name="Min" xml:space="preserve">
+    <value>Мин</value>
+  </data>
   <data name="Name" xml:space="preserve">
     <value>Имя блаблабла</value>
+  </data>
+  <data name="Register" xml:space="preserve">
+    <value>Решистрация</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Сохранить</value>
+  </data>
+  <data name="Size" xml:space="preserve">
+    <value>Размер</value>
+  </data>
+  <data name="Spawn" xml:space="preserve">
+    <value>Рождение</value>
+  </data>
+  <data name="StartButton" xml:space="preserve">
+    <value>Старт/Стоп</value>
+  </data>
+  <data name="Themes" xml:space="preserve">
+    <value>Темы</value>
+  </data>
+  <data name="ZoomIn" xml:space="preserve">
+    <value>Приблизить</value>
+  </data>
+  <data name="ZoomOut" xml:space="preserve">
+    <value>Отдалить</value>
   </data>
 </root>
