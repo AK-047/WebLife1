@@ -1,10 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using System.Web.Security;
+using System.Web.Script.Serialization;
+using WebLife.DAL;
 using WebLife.Helpers;
+using WebLife.Models;
 
 namespace WebLife.Controllers
 {
@@ -27,6 +27,45 @@ namespace WebLife.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+        public ActionResult Load()
+        {
+            var model = new ConfigsModel();
+            using (var dm = new DataManager())
+            {
+                model.Configs = dm.GetConfigs();
+            }
+
+            return View(model);
+        }
+
+        public ActionResult Uploading(string id)
+        {
+            using (var dm = new DataManager())
+            {
+                Config config = dm.GetConfig(id);
+                ViewBag.CellSize = config.CellSize;
+                ViewBag.Name = config.Name;
+                ViewBag.Min = config.Min;
+                ViewBag.Max = config.Max;
+                ViewBag.Spawn = config.Spawn;
+                var cells = dm.GetCells(config.ConfigId);
+                var X = new int[cells.Length];
+                var Y = new int[cells.Length];
+                for (int i = 0; i < cells.Length; i++)
+                {
+                    if (cells[i].ConfigId != config.ConfigId)
+                        continue;
+
+                    X[i] = cells[i].X;
+                    Y[i] = cells[i].Y;
+                }
+               
+
+                ViewBag.X = new JavaScriptSerializer().Serialize(X);
+                ViewBag.Y = new JavaScriptSerializer().Serialize(Y);
+            }
+            return View("Index");
         }
     }
 }

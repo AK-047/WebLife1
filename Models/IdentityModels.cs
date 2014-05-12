@@ -19,6 +19,8 @@ namespace WebLife.Models
     {
         [Key]
         public string  ConfigId { get; set; }
+        public string Name { get; set; }
+        public string UiserId { get; set; }
         public int CellSize { get; set; }
         public int Min  { get; set; }
         public int Max { get; set; }

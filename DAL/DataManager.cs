@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using WebLife.Models;
@@ -50,16 +51,18 @@ namespace WebLife.DAL
             _context.SaveChanges();
         }
 
-        public void SaveConfig(int cellSize, int min, int max, int spawn, int[][] grid)
+        public void SaveConfig(string name,int cellSize, int min, int max, int spawn, int[][] grid, string userId)
         {
             var configDbSet = _context.Set<Config>();
             var config = new Config
             {
+                Name = name,
                 CellSize = cellSize,
                 Min = min,
                 Max = max,
                 Spawn = spawn,
-                ConfigId = Guid.NewGuid().ToString()
+                ConfigId = Guid.NewGuid().ToString(),
+                UiserId = userId
             };
             configDbSet.Attach(config);
             _context.Entry(config).State = EntityState.Added;
@@ -89,10 +92,27 @@ namespace WebLife.DAL
             }
         }
 
+        public List<Config> GetConfigs()
+        {
+            return _context.Set<Config>().ToList();
+        }
+
+        public Config GetConfig(string id)
+        {
+            return _context.Set<Config>().SingleOrDefault(c => c.ConfigId == id);
+        }
+
+        public Cell[] GetCells(string configId)
+        {
+            return _context.Set<Cell>().ToArray();
+        }
 
         public void Dispose()
         {
             ((IDisposable) _context).Dispose();
         }
+        
+        
+        
     }
 }

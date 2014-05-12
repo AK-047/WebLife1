@@ -1,0 +1,16 @@
+﻿@model WebLife.Models.ConfigsModel
+
+@{
+    ViewBag.Title = "Load";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Load</h2>
+<ul>
+    @foreach (var config in Model.Configs)
+    {
+        <li>
+            <a href="@Url.Action("Uploading",new {@id = @config.ConfigId})">@config.Name</a>
+        </li>
+    }
+</ul>

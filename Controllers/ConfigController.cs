@@ -1,4 +1,5 @@
 ﻿using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using WebLife.DAL;
 
 namespace WebLife.Controllers
@@ -8,11 +9,11 @@ namespace WebLife.Controllers
         //
         // POST: /Config/
         [HttpPost]
-        public ActionResult Save(int cellSize, int min, int max, int spawn, int[][] grid)
+        public ActionResult Save(string name,int cellSize, int min, int max, int spawn, int[][] grid)
         {
             using (var dm = new DataManager())
             {
-                dm.SaveConfig(cellSize, min, max, spawn, grid);
+                dm.SaveConfig(name,cellSize, min, max, spawn, grid, User.Identity.GetUserId());
             }
             return RedirectToAction("Index","Home");
         }

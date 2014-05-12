@@ -30,6 +30,23 @@
                      Life.prevGeneretion = Array.matrix(Life.HEIGHT, Life.WIDTH, 0);
                      Life.grid = Array.matrix(Life.HEIGHT, Life.WIDTH, 0);
                      Life.counter = 0;
+                      
+                     if ($("#config").data("cellsize") !== "") {
+                         Life.minimum = $("#config").data("min");
+                         $("#minimumSelect").val(Life.minimum);
+                         Life.maximum = $("#config").data("max");
+                         $("#maximumSelect").val(Life.maximum);
+                         Life.spawn = $("#config").data("spawn");
+                         $("#spawnSelect").val(Life.spawn);
+                         Life.CELL_SIZE = $("#config").data("cellsize");
+                         var X = $("#config").data("x");
+                         var Y = $("#config").data("y");
+                         for (var i = 0; i < X.length; i++) {
+                             Life.grid[X[i]][Y[i]] = 1;
+                             Life.prevGeneretion[X[i]][Y[i]] = 0;
+                         }
+                       
+                     }
                      Life.updateState = function () {
                          var neighbours;
                          var nextGenerationGrid = Array.matrix(Life.HEIGHT, Life.WIDTH, 0);
@@ -84,7 +101,7 @@
                      var resizeUpLink = document.getElementById("resizeUp");
                      var resizeDownLink = document.getElementById("resizeDown");
                      var gridSize = document.getElementById("gridSize");
-                     var saveLink = document.getElementById("save");
+                     var saveLink = document.getElementById("saveOk");
                      gridSize.innerHTML =", Size:" + Life.WIDTH + "x" + Life.HEIGHT;
                      controlLink.onclick = function () {
                          switch (Life.state) {
@@ -157,8 +174,9 @@
                          updateAnimations1();
                      }
                      saveLink.onclick = function () {
-                         console.log(typeof (Life.grid));
+                         $("#enteringName").dialog("close");
                          var arguments = {};
+                         arguments.name = document.getElementById("configName").value;
                          arguments.cellSize = Life.CELL_SIZE;
                          arguments.min = Life.minimum;
                          arguments.max = Life.maximum;
@@ -286,11 +304,15 @@
                              var cell = new Cell(Math.floor((y) / Life.CELL_SIZE), Math.floor((x) / Life.CELL_SIZE));
                              return cell;
                          };
+
+                         updateAnimations();
                          gridCanvas.addEventListener("click", canvasOnClickHandler, false);
                      } else {
                          alert("Canvas is unsupported in your browser.");
                      }
                  }
+
+
         );
 
 
