@@ -12,7 +12,7 @@
                      };
                      
                      var Life = {};
-                     Life.CELL_SIZE = 20;
+                     Life.CELL_SIZE = 16;
                      Life.X = 4096;
                      Life.Y = 4096;
                      Life.WIDTH = Math.floor(Life.X / Life.CELL_SIZE);
@@ -126,6 +126,7 @@
                          Life.counter = 0;
                          clearInterval(Life.interval);
                          Life.state = Life.STOPPED;
+                         Strokes();
                          updateAnimations1();
                      }
                      minimumSelect.onchange = function () {
@@ -172,6 +173,7 @@
                          Life.grid = Array.matrix(Life.HEIGHT, Life.WIDTH, 0);
                          gridSize.innerHTML = ", Size:" + Life.WIDTH + "x" + Life.HEIGHT;
                          clearLink.onclick();
+                        
                      }
                      saveLink.onclick = function () {
                          $("#enteringName").dialog("close");
@@ -198,12 +200,7 @@
                      }
                      function update() {
                          Life.updateState();
-                         //updateInput();
-                         //updateAI();
-                         //updatePhysics();
                          updateAnimations();
-                         //updateSound();
-                         //updateVideo();
                      };
                      function updateAnimations1() {
                          for (var h = 0; h < Life.HEIGHT; h++) {
@@ -286,7 +283,7 @@
                                  var cell = getCursorPosition(event);
                                  var state = Life.grid[cell.row][cell.column] == Life.ALIVE ? Life.DEAD : Life.ALIVE;
                                  Life.grid[cell.row][cell.column] = state;
-                                 updateAnimations();
+                                 updateAnimations1();
                          };
                          function getCursorPosition(event) {
                              var x;

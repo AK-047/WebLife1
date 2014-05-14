@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="About" xml:space="preserve">
+    <value>On this site you can play wonderful game called</value>
+  </data>
   <data name="Chat" xml:space="preserve">
     <value>Chat</value>
   </data>
@@ -126,8 +129,14 @@
   <data name="Controls" xml:space="preserve">
     <value>Controls</value>
   </data>
+  <data name="GameOfLife" xml:space="preserve">
+    <value>Game of Life</value>
+  </data>
   <data name="GenerationCounter" xml:space="preserve">
     <value>Generation counter</value>
+  </data>
+  <data name="Greetings" xml:space="preserve">
+    <value>Welcome to WebLife</value>
   </data>
   <data name="Hello" xml:space="preserve">
     <value>Hello</value>
@@ -167,6 +176,9 @@
   </data>
   <data name="Spawn" xml:space="preserve">
     <value>Spawn</value>
+  </data>
+  <data name="Start" xml:space="preserve">
+    <value>Start playing!</value>
   </data>
   <data name="StartButton" xml:space="preserve">
     <value>Start/Stop</value>

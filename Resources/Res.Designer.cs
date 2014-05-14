@@ -61,6 +61,15 @@ namespace WebLife.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to On this site you can play wonderful game called.
+        /// </summary>
+        public static string About {
+            get {
+                return ResourceManager.GetString("About", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Chat.
         /// </summary>
         public static string Chat {
@@ -88,11 +97,29 @@ namespace WebLife.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Game of Life.
+        /// </summary>
+        public static string GameOfLife {
+            get {
+                return ResourceManager.GetString("GameOfLife", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Generation counter.
         /// </summary>
         public static string GenerationCounter {
             get {
                 return ResourceManager.GetString("GenerationCounter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Welcome to WebLife.
+        /// </summary>
+        public static string Greetings {
+            get {
+                return ResourceManager.GetString("Greetings", resourceCulture);
             }
         }
         
@@ -210,6 +237,15 @@ namespace WebLife.Resources {
         public static string Spawn {
             get {
                 return ResourceManager.GetString("Spawn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start playing!.
+        /// </summary>
+        public static string Start {
+            get {
+                return ResourceManager.GetString("Start", resourceCulture);
             }
         }
         

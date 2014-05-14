@@ -119,8 +119,8 @@ else
 {
     <div class="jumbotron">
 
-        <p><h1 class="text-center">Welcome to WebLife </h1></p>
-        <p><h3 class="text-center">On our site you can play wonderful game called <b>"Game of Life"</b></h3></p>
-        <a class="btn btn-primary btn-lg btn-block" href="@Url.Action("Login","Account")"><h2>Start playing!</h2></a>
+        <p><h1 class="text-center">@Res.Greetings </h1></p>
+        <p><h3 class="text-center">@Res.About <b>"@Res.GameOfLife"</b></h3></p>
+        <a class="btn btn-primary btn-lg btn-block" href="@Url.Action("Login","Account")"><h2>@Res.Start</h2></a>
     </div>
 }

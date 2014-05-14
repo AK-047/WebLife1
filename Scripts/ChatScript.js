@@ -7,7 +7,7 @@
         var encodedName = $('<div />').text(name).html();
         var encodedMsg = $('<div />').text(message).html();
         // Add the message to the page. 
-        $('#discussion').append('<li><strong>' + encodedName
+        $('#discussion').append('<li><strong class="btn-primary">' + encodedName
             + '</strong>:&nbsp;&nbsp;' + encodedMsg + '</li>');
     };
     // Start the connection.

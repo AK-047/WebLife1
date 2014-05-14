@@ -107,6 +107,16 @@ namespace WebLife.DAL
             return _context.Set<Cell>().Where(c => c.ConfigId == configId).ToArray();
         }
 
+        public void RemoveConfig(string id)
+        {
+
+            DbSet<Config> configs = _context.Set<Config>();
+            var config = configs.SingleOrDefault(c => c.ConfigId == id);
+            _context.Set<Config>().Remove(config);
+            _context.Entry(config).State = EntityState.Deleted;
+            _context.SaveChanges();
+        }
+
         public void Dispose()
         {
             ((IDisposable) _context).Dispose();

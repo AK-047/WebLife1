@@ -1,16 +1,40 @@
-﻿@model WebLife.Models.ConfigsModel
+﻿@using Microsoft.AspNet.Identity
+@using WebLife.DAL
+@model WebLife.Models.ConfigsModel
 
 @{
     ViewBag.Title = "Load";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@using (Html.BeginForm())
+{
+    <div class="col-md-12">
+        <table class="table table-striped">
 
-<h2>Load</h2>
-<ul>
-    @foreach (var config in Model.Configs)
-    {
-        <li>
-            <a href="@Url.Action("Uploading",new {@id = @config.ConfigId})">@config.Name</a>
-        </li>
-    }
-</ul>
+
+
+            @foreach (var config in Model.Configs)
+            {
+                <tr>
+                    @using (var dm = new DataManager())
+                    {
+                        <td>
+                            @config.Name by @dm.GetUser(u => u.Id == config.UiserId).UserName
+                        </td>
+                        <td>
+                            rules: min-@config.Min, max-@config.Max, spawn-@config.Spawn
+                        </td>
+                        <td>
+                            <a class="btn btn-default" href="@Url.Action("Uploading", new {@id = @config.ConfigId})">Load</a>
+                        </td>
+                        if ((config.UiserId == User.Identity.GetUserId()) || ((dm.GetUser(u => u.Id == User.Identity.GetUserId()).Role <= 1)))
+                        {
+                            <td><a class="glyphicon glyphicon-remove" href="@Url.Action("DeleteConfig", new {@id = @config.ConfigId})">Delete</a></td>
+                        }
+                            
+                    }
+                </tr>
+            }
+        </table>
+    </div>
+}

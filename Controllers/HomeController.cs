@@ -38,6 +38,11 @@ namespace WebLife.Controllers
 
             return View(model);
         }
+        public ActionResult DeleteConfig(string id)
+        {
+            new DataManager().RemoveConfig(id);
+            return RedirectToAction("Load");
+        }
 
         public ActionResult Uploading(string id)
         {
